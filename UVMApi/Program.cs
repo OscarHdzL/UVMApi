@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Datos.Contexto;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -76,6 +78,8 @@ builder.Services.AddSwaggerGen(option =>
 
         );
 });
+
+//builder.Services.AddDbContext<ApplicationDbContext>(opciones =>opciones.UseSqlServer())
 
 
 var app = builder.Build();
