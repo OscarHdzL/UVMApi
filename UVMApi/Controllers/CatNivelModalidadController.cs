@@ -14,10 +14,7 @@ namespace UVMApi.Controllers
     //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class CatNivelModalidadController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+
 
         private readonly ILogger<CatNivelModalidadController> _logger;
         public CatNivelModalidadNegocio negocio = new CatNivelModalidadNegocio();

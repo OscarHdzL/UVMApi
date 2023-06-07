@@ -4026,25 +4026,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ohernandez\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Hp\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repos\\UVMApi\\UVMApi\\UVMApi.csproj",
+      "projectUniqueName": "C:\\github\\UVMApi\\UVMApi.csproj",
       "projectName": "UVMApi",
-      "projectPath": "C:\\Repos\\UVMApi\\UVMApi\\UVMApi.csproj",
-      "packagesPath": "C:\\Users\\ohernandez\\.nuget\\packages\\",
-      "outputPath": "C:\\Repos\\UVMApi\\UVMApi\\obj\\",
+      "projectPath": "C:\\github\\UVMApi\\UVMApi.csproj",
+      "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
+      "outputPath": "C:\\github\\UVMApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ohernandez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4059,11 +4057,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Repos\\UVMApi\\Datos\\Datos.csproj": {
-              "projectPath": "C:\\Repos\\UVMApi\\Datos\\Datos.csproj"
+            "C:\\github\\Datos\\Datos.csproj": {
+              "projectPath": "C:\\github\\Datos\\Datos.csproj"
             },
-            "C:\\Repos\\UVMApi\\Negocio\\Negocio.csproj": {
-              "projectPath": "C:\\Repos\\UVMApi\\Negocio\\Negocio.csproj"
+            "C:\\github\\Negocio\\Negocio.csproj": {
+              "projectPath": "C:\\github\\Negocio\\Negocio.csproj"
             }
           }
         }
@@ -4105,29 +4103,10 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.14, 6.0.14]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[6.0.14, 6.0.14]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.14, 6.0.14]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.14, 6.0.14]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4136,7 +4115,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\6.0.311\\RuntimeIdentifierGraph.json"
       }
     }
   }

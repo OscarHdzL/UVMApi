@@ -13,10 +13,7 @@ namespace UVMApi.Controllers
     //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class AcreditadoraController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        
 
         private readonly ILogger<AcreditadoraController> _logger;
         public AcreditadoraNegocio negocio = new AcreditadoraNegocio();

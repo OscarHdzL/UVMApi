@@ -14,10 +14,7 @@ namespace UVMApi.Controllers
     //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class CatCampusController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+  
 
         private readonly ILogger<CatCampusController> _logger;
         public CatCampusNegocio negocio = new CatCampusNegocio();
