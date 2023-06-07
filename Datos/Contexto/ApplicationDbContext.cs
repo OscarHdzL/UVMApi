@@ -8,23 +8,23 @@ using Microsoft.Extensions.Configuration;
 
 namespace Datos.Contexto
 {
-    public  class ApplicationDbContext: DbContext
-    {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
-        {
+    //public  class ApplicationDbContext: DbContext
+    //{
+    //    public ApplicationDbContext(DbContextOptions options) : base(options)
+    //    {
 
-        }
+    //    }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                IConfigurationRoot Configuration = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                                                   .AddJsonFile("appsettings.json", optional: false).Build();
-                optionsBuilder.UseSqlServer(Configuration.GetConnectionString("LibroFimpes"));
-            }
-        }
-    }
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //    {
+    //        if (!optionsBuilder.IsConfigured)
+    //        {
+    //            IConfigurationRoot Configuration = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+    //                                               .AddJsonFile("appsettings.json", optional: false).Build();
+    //            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("LibroFimpes"));
+    //        }
+    //    }
+    //}
 
 }

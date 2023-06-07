@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using Datos.Contexto;
+//using Datos.Contexto;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
