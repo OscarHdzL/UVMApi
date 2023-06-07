@@ -15,10 +15,7 @@ namespace UVMApi.Controllers
     //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class PerfilController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+
 
         private readonly ILogger<PerfilController> _logger;
         public PerfilNegocio negocio = new PerfilNegocio();
