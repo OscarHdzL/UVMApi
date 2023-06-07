@@ -3,11 +3,17 @@ using System.Collections.Generic;
 
 namespace Datos.ModelosDBSIAC.Entities;
 
-public partial class TblPerfil
+public partial class CatAreaResponsable
 {
     public int Id { get; set; }
 
     public string Nombre { get; set; } = null!;
+
+    public int? AreaResponsablePadre { get; set; }
+
+    public bool Generica { get; set; }
+
+    public bool Consolidacion { get; set; }
 
     public bool Activo { get; set; }
 
@@ -19,9 +25,7 @@ public partial class TblPerfil
 
     public string? UsuarioModificacion { get; set; }
 
-    public virtual ICollection<CatUsuario> CatUsuarios { get; set; } = new List<CatUsuario>();
+    public virtual CatAreaResponsable? AreaResponsablePadreNavigation { get; set; }
 
-    public virtual ICollection<RelPerfilvistum> RelPerfilvista { get; set; } = new List<RelPerfilvistum>();
-
-    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
+    public virtual ICollection<CatAreaResponsable> InverseAreaResponsablePadreNavigation { get; set; } = new List<CatAreaResponsable>();
 }

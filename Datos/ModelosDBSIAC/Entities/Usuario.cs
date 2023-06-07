@@ -3,13 +3,23 @@ using System.Collections.Generic;
 
 namespace Datos.ModelosDBSIAC.Entities;
 
-public partial class TblPerfil
+public partial class Usuario
 {
     public int Id { get; set; }
 
     public string Nombre { get; set; } = null!;
 
+    public string Apellidos { get; set; } = null!;
+
+    public string Correo { get; set; } = null!;
+
     public bool Activo { get; set; }
+
+    public int CatNivelRevisionId { get; set; }
+
+    public int TblPerfilId { get; set; }
+
+    public bool? Todos { get; set; }
 
     public DateTime FechaCreacion { get; set; }
 
@@ -19,9 +29,7 @@ public partial class TblPerfil
 
     public string? UsuarioModificacion { get; set; }
 
-    public virtual ICollection<CatUsuario> CatUsuarios { get; set; } = new List<CatUsuario>();
+    public virtual CatNivelRevision CatNivelRevision { get; set; } = null!;
 
-    public virtual ICollection<RelPerfilvistum> RelPerfilvista { get; set; } = new List<RelPerfilvistum>();
-
-    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
+    public virtual TblPerfil TblPerfil { get; set; } = null!;
 }

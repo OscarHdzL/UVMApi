@@ -4,32 +4,32 @@ using System.Collections.Generic;
 namespace Datos.ModelosDBSIAC.Entities;
 
 /// <summary>
-/// Listado de Nivel/Modalidad
+/// Listado de cápitulos.
 /// </summary>
-public partial class CatNivelModalidad
+public partial class CatCapitulo
 {
     /// <summary>
-    /// Siglas de identificación única para la Nivel/Modalidad.
+    /// Identificador del proceso al que pertenece este cápitulo.
     /// </summary>
-    public int Id { get; set; }
+    public int AcreditadoraProcesoId { get; set; }
 
     /// <summary>
-    /// Nivel  de Nivel/Modalidad.
+    /// Número del cápitulo dentro del proceso.
     /// </summary>
-    public string Nivel { get; set; } = null!;
+    public string Id { get; set; } = null!;
 
     /// <summary>
-    /// Modalidad de Nivel/Modalidad.
+    /// Nombre del cápitulo.
     /// </summary>
-    public string Modalidad { get; set; } = null!;
+    public string Nombre { get; set; } = null!;
 
     /// <summary>
-    /// Indicador de activo/inactivo para el registro.
+    /// Descripción larga del cápitulo.
     /// </summary>
-    public bool Activo { get; set; }
+    public string Descripcion { get; set; } = null!;
 
     /// <summary>
-    /// Fecha de creación del registro.
+    /// Fecha en la que fue creado el registro.
     /// </summary>
     public DateTime FechaCreacion { get; set; }
 
@@ -44,9 +44,9 @@ public partial class CatNivelModalidad
     public DateTime? FechaModificacion { get; set; }
 
     /// <summary>
-    /// Usuario que realizó la última modificación sobre el registro.
+    /// Usuario de última modificación del registro.
     /// </summary>
     public string? UsuarioModificacion { get; set; }
 
-    public virtual ICollection<CatPonderacion> CatPonderacions { get; set; } = new List<CatPonderacion>();
+    public virtual AcreditadoraProceso AcreditadoraProceso { get; set; } = null!;
 }

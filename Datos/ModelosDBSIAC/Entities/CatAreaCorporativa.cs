@@ -4,32 +4,27 @@ using System.Collections.Generic;
 namespace Datos.ModelosDBSIAC.Entities;
 
 /// <summary>
-/// Listado de Nivel/Modalidad
+/// Catálogo de la área corporativa.
 /// </summary>
-public partial class CatNivelModalidad
+public partial class CatAreaCorporativa
 {
     /// <summary>
-    /// Siglas de identificación única para la Nivel/Modalidad.
+    /// Clave única de la área corporativa.
     /// </summary>
     public int Id { get; set; }
 
     /// <summary>
-    /// Nivel  de Nivel/Modalidad.
+    /// Nombre de la área corporativa.
     /// </summary>
-    public string Nivel { get; set; } = null!;
+    public string Nombre { get; set; } = null!;
 
     /// <summary>
-    /// Modalidad de Nivel/Modalidad.
-    /// </summary>
-    public string Modalidad { get; set; } = null!;
-
-    /// <summary>
-    /// Indicador de activo/inactivo para el registro.
+    /// Indica si el registro se encuentra activo en el sistema.
     /// </summary>
     public bool Activo { get; set; }
 
     /// <summary>
-    /// Fecha de creación del registro.
+    /// Fecha en la que fue creado el registro.
     /// </summary>
     public DateTime FechaCreacion { get; set; }
 
@@ -44,9 +39,7 @@ public partial class CatNivelModalidad
     public DateTime? FechaModificacion { get; set; }
 
     /// <summary>
-    /// Usuario que realizó la última modificación sobre el registro.
+    /// Usuario de última modificación del registro.
     /// </summary>
     public string? UsuarioModificacion { get; set; }
-
-    public virtual ICollection<CatPonderacion> CatPonderacions { get; set; } = new List<CatPonderacion>();
 }

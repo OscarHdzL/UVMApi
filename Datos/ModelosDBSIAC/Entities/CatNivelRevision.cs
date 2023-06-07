@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 namespace Datos.ModelosDBSIAC.Entities;
 
-public partial class CatVistum
+public partial class CatNivelRevision
 {
     public int Id { get; set; }
 
     public string Nombre { get; set; } = null!;
+
+    public bool Activo { get; set; }
 
     public DateTime FechaCreacion { get; set; }
 
@@ -17,11 +19,5 @@ public partial class CatVistum
 
     public string? UsuarioModificacion { get; set; }
 
-    public string Clave { get; set; } = null!;
-
-    public int CatTipoVistaId { get; set; }
-
-    public virtual CatTipoVistum CatTipoVista { get; set; } = null!;
-
-    public virtual ICollection<RelPerfilvistum> RelPerfilvista { get; set; } = new List<RelPerfilvistum>();
+    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 }

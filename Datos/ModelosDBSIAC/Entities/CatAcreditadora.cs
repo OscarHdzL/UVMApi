@@ -4,24 +4,18 @@ using System.Collections.Generic;
 namespace Datos.ModelosDBSIAC.Entities;
 
 /// <summary>
-/// Listado de Nivel/Modalidad
+/// Listado de Acreditadoras
 /// </summary>
-public partial class CatNivelModalidad
+public partial class CatAcreditadora
 {
-    /// <summary>
-    /// Siglas de identificación única para la Nivel/Modalidad.
-    /// </summary>
     public int Id { get; set; }
 
     /// <summary>
-    /// Nivel  de Nivel/Modalidad.
+    /// Nombre de la acreditadora.
     /// </summary>
-    public string Nivel { get; set; } = null!;
+    public string Nombre { get; set; } = null!;
 
-    /// <summary>
-    /// Modalidad de Nivel/Modalidad.
-    /// </summary>
-    public string Modalidad { get; set; } = null!;
+    public bool EsFimpes { get; set; }
 
     /// <summary>
     /// Indicador de activo/inactivo para el registro.
@@ -47,6 +41,4 @@ public partial class CatNivelModalidad
     /// Usuario que realizó la última modificación sobre el registro.
     /// </summary>
     public string? UsuarioModificacion { get; set; }
-
-    public virtual ICollection<CatPonderacion> CatPonderacions { get; set; } = new List<CatPonderacion>();
 }

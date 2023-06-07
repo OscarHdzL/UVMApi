@@ -4,34 +4,43 @@ using System.Collections.Generic;
 namespace Datos.ModelosDBSIAC.Entities;
 
 /// <summary>
-/// Catálogo de campus.
+/// Listado de usaurios del sistema.
 /// </summary>
-public partial class CatCampus
+public partial class CatUsuario
 {
     /// <summary>
-    /// Clave única del campus. 
+    /// Identificador único del usuario en el directorio activo.
     /// </summary>
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     /// <summary>
-    /// Nombre del campus.
+    /// Nombre(s) del usuario.
     /// </summary>
     public string Nombre { get; set; } = null!;
 
     /// <summary>
-    /// Región a la que pertenece este campus.
+    /// Apellido paterno del usaurio.
     /// </summary>
-    public int? RegionId { get; set; }
+    public string Apellidos { get; set; } = null!;
+
+    /// <summary>
+    /// Correo electrónico del usuario.
+    /// </summary>
+    public string Correo { get; set; } = null!;
 
     /// <summary>
     /// Indica si el registro se encuentra activo en el sistema.
     /// </summary>
     public bool Activo { get; set; }
 
+    public bool NivelRevision { get; set; }
+
     /// <summary>
     /// Fecha en la que fue creado el registro.
     /// </summary>
     public DateTime FechaCreacion { get; set; }
+
+    public int PerfilId { get; set; }
 
     /// <summary>
     /// Usuario que generó el registro.
@@ -48,5 +57,7 @@ public partial class CatCampus
     /// </summary>
     public string? UsuarioModificacion { get; set; }
 
-    public virtual CatRegion? Region { get; set; }
+    public bool? EsAvisoAceptado { get; set; }
+
+    public virtual TblPerfil Perfil { get; set; } = null!;
 }

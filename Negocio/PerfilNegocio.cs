@@ -36,7 +36,6 @@ namespace Negocio
                 foreach (var perfil in Perfiles)
                 {
 
-
                     perfil.RelPerfilvista = await ctx.RelPerfilvista.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVista"}, @Id = {perfil.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
                     foreach (var vista in perfil.RelPerfilvista)
                     {
@@ -46,8 +45,7 @@ namespace Negocio
 
                     }
 
-                    perfil.RelPerfilcampuses = await ctx.RelPerfilcampuses.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilCampus"}, @Id = {perfil.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
-
+                    
                 }
 
                 Respuesta = TipoAccion.Positiva(Perfiles);
@@ -141,11 +139,9 @@ namespace Negocio
 
                 PerfilDTO entidad = new PerfilDTO();
                 entidad.Id = id;
-                entidad.VistaInicial = 0;
                 entidad.Activo = false;
                 entidad.FechaCreacion = DateTime.Now;
                 entidad.FechaModificacion = DateTime.Now;
-
 
 
                 var parametroId = new SqlParameter("@idRespuesta", SqlDbType.Int);

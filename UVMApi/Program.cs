@@ -103,6 +103,18 @@ if (app.Environment.IsDevelopment())
     });
 
 }
+else
+{
+    app.UseCors(opt => opt.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        //CONFIIGURACION PARA AUTORIZATION CON OAUTH2 DESDE SWAGGER
+        c.OAuthClientId(builder.Configuration["SwaggerAzureAD:ClientId"]);
+        c.OAuthUsePkce();
+        c.OAuthScopeSeparator(" ");
+    });
+}
 
 app.UseHttpsRedirection();
 

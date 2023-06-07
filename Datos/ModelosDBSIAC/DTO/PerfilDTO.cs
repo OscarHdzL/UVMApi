@@ -12,8 +12,7 @@ namespace Datos.ModelosDBSIAC.DTO
 
         public string Nombre { get; set; } = null!;
 
-        public int VistaInicial { get; set; }
-
+       
         public bool Activo { get; set; }
 
         public DateTime FechaCreacion { get; set; }
@@ -25,7 +24,6 @@ namespace Datos.ModelosDBSIAC.DTO
         public string? UsuarioModificacion { get; set; }
 
         public List<PerfilVistaDTO> Vistas { get; set; }
-        public List<int> Campus { get; set; }
     }
 
     public class PerfilVistaDTO
