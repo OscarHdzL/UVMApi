@@ -8,7 +8,7 @@ using Negocio.Respuesta;
 
 namespace UVMApi.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
@@ -35,13 +35,13 @@ namespace UVMApi.Controllers
             return negocio.Get(null, pageSize, pageNumber);
         }
 
-        [HttpGet]
-        [Route("[action]")]
-        public Task<TipoAccion> GetById(int id)
-        {
-            //PAGINA 0, NO REGISTROS 1
-            return negocio.Get(id, 1, 0);
-        }
+        //[HttpGet]
+        //[Route("[action]")]
+        //public Task<TipoAccion> GetById(int id)
+        //{
+        //    //PAGINA 0, NO REGISTROS 1
+        //    return negocio.Get(id, 1, 0);
+        //}
 
         [HttpPost]
         [Route("[action]")]
