@@ -30,17 +30,14 @@ public partial class AppSIACDbContext : DbContext
 
     public virtual DbSet<CatVistum> CatVista { get; set; }
 
-    public virtual DbSet<Perfil> Perfils { get; set; }
+    public virtual DbSet<RelPerfilcampus> RelPerfilcampuses { get; set; }
 
-    public virtual DbSet<PerfilCampus> PerfilCampuses { get; set; }
+    public virtual DbSet<RelPerfilvistatipoacceso> RelPerfilvistatipoaccesos { get; set; }
 
-    public virtual DbSet<PerfilVistaTipoAcceso> PerfilVistaTipoAccesos { get; set; }
+    public virtual DbSet<RelPerfilvistum> RelPerfilvista { get; set; }
 
-    public virtual DbSet<PerfilVistum> PerfilVista { get; set; }
+    public virtual DbSet<TblPerfil> TblPerfils { get; set; }
 
-    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Server=PL-790;Initial Catalog=DBSIAC-Desa-UVM;Persist Security Info=False;User ID=ohl;Password=Passw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -172,14 +169,10 @@ public partial class AppSIACDbContext : DbContext
 
         modelBuilder.Entity<CatTipoAcceso>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cat_Tipo__3214EC0794E8D992");
+            entity.HasKey(e => e.Id).HasName("PK__Cat_Tipo__3214EC07CB781B2B");
 
             entity.ToTable("Cat_TipoAcceso");
 
-            entity.Property(e => e.Id)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
             entity.Property(e => e.Descripcion)
                 .HasMaxLength(150)
                 .IsUnicode(false);
@@ -206,11 +199,62 @@ public partial class AppSIACDbContext : DbContext
             entity.Property(e => e.UsuarioModificacion).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Perfil>(entity =>
+        modelBuilder.Entity<RelPerfilcampus>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Perfil__3214EC077CC0B665");
+            entity.HasKey(e => e.Id).HasName("PK__rel_perf__3214EC07E908BEAB");
 
-            entity.ToTable("Perfil");
+            entity.ToTable("rel_perfilcampus");
+
+            entity.HasOne(d => d.CatCampus).WithMany(p => p.RelPerfilcampuses)
+                .HasForeignKey(d => d.CatCampusId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__rel_perfi__CatCa__1209AD79");
+
+            entity.HasOne(d => d.Perfil).WithMany(p => p.RelPerfilcampuses)
+                .HasForeignKey(d => d.PerfilId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__rel_perfi__CatCa__11158940");
+        });
+
+        modelBuilder.Entity<RelPerfilvistatipoacceso>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__rel_perf__3214EC0736FD7883");
+
+            entity.ToTable("rel_perfilvistatipoacceso");
+
+            entity.HasOne(d => d.CatTipoAcceso).WithMany(p => p.RelPerfilvistatipoaccesos)
+                .HasForeignKey(d => d.CatTipoAccesoId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__rel_perfi__CatTi__0E391C95");
+
+            entity.HasOne(d => d.PerfilVista).WithMany(p => p.RelPerfilvistatipoaccesos)
+                .HasForeignKey(d => d.PerfilVistaId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__rel_perfi__CatTi__0D44F85C");
+        });
+
+        modelBuilder.Entity<RelPerfilvistum>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__rel_perf__3214EC077CBCC26F");
+
+            entity.ToTable("rel_perfilvista");
+
+            entity.HasOne(d => d.Perfil).WithMany(p => p.RelPerfilvista)
+                .HasForeignKey(d => d.PerfilId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__rel_perfi__Vista__09746778");
+
+            entity.HasOne(d => d.Vista).WithMany(p => p.RelPerfilvista)
+                .HasForeignKey(d => d.VistaId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__rel_perfi__Vista__0A688BB1");
+        });
+
+        modelBuilder.Entity<TblPerfil>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__tbl_perf__3214EC079489D165");
+
+            entity.ToTable("tbl_perfil");
 
             entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
             entity.Property(e => e.FechaModificacion).HasColumnType("datetime");
@@ -218,64 +262,10 @@ public partial class AppSIACDbContext : DbContext
             entity.Property(e => e.UsuarioCreacion).HasMaxLength(50);
             entity.Property(e => e.UsuarioModificacion).HasMaxLength(50);
 
-            entity.HasOne(d => d.VistaInicialNavigation).WithMany(p => p.Perfils)
+            entity.HasOne(d => d.VistaInicialNavigation).WithMany(p => p.TblPerfils)
                 .HasForeignKey(d => d.VistaInicial)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Perfil__UsuarioM__5CA1C101");
-        });
-
-        modelBuilder.Entity<PerfilCampus>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__PerfilCa__3214EC0735030F0E");
-
-            entity.ToTable("PerfilCampus");
-
-            entity.HasOne(d => d.CatCampus).WithMany(p => p.PerfilCampuses)
-                .HasForeignKey(d => d.CatCampusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PerfilCam__CatCa__681373AD");
-
-            entity.HasOne(d => d.Perfil).WithMany(p => p.PerfilCampuses)
-                .HasForeignKey(d => d.PerfilId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PerfilCam__CatCa__671F4F74");
-        });
-
-        modelBuilder.Entity<PerfilVistaTipoAcceso>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__PerfilVi__3214EC07CA9D74C6");
-
-            entity.ToTable("PerfilVistaTipoAcceso");
-
-            entity.Property(e => e.CatTipoAccesoId)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-
-            entity.HasOne(d => d.CatTipoAcceso).WithMany(p => p.PerfilVistaTipoAccesos)
-                .HasForeignKey(d => d.CatTipoAccesoId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PerfilVis__CatTi__6442E2C9");
-
-            entity.HasOne(d => d.PerfilVista).WithMany(p => p.PerfilVistaTipoAccesos)
-                .HasForeignKey(d => d.PerfilVistaId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PerfilVis__CatTi__634EBE90");
-        });
-
-        modelBuilder.Entity<PerfilVistum>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__PerfilVi__3214EC07C573B9DC");
-
-            entity.HasOne(d => d.Perfil).WithMany(p => p.PerfilVista)
-                .HasForeignKey(d => d.PerfilId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PerfilVis__Vista__5F7E2DAC");
-
-            entity.HasOne(d => d.Vista).WithMany(p => p.PerfilVista)
-                .HasForeignKey(d => d.VistaId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PerfilVis__Vista__607251E5");
+                .HasConstraintName("FK__tbl_perfi__Usuar__0697FACD");
         });
 
         OnModelCreatingPartial(modelBuilder);

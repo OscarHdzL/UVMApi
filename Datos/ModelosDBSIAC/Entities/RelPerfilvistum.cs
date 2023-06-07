@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Datos.ModelosDBSIAC.Entities;
 
-public partial class PerfilVistum
+public partial class RelPerfilvistum
 {
     public int Id { get; set; }
 
@@ -11,9 +11,9 @@ public partial class PerfilVistum
 
     public int VistaId { get; set; }
 
-    public virtual Perfil Perfil { get; set; } = null!;
+    public virtual TblPerfil Perfil { get; set; } = null!;
 
-    public virtual ICollection<PerfilVistaTipoAcceso> PerfilVistaTipoAccesos { get; set; } = new List<PerfilVistaTipoAcceso>();
+    public virtual ICollection<RelPerfilvistatipoacceso> RelPerfilvistatipoaccesos { get; set; } = new List<RelPerfilvistatipoacceso>();
 
     public virtual CatVistum Vista { get; set; } = null!;
 }

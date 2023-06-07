@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Datos.ModelosDBSIAC.Entities;
 
-public partial class PerfilCampus
+public partial class RelPerfilcampus
 {
     public int Id { get; set; }
 
@@ -13,5 +13,5 @@ public partial class PerfilCampus
 
     public virtual CatCampus CatCampus { get; set; } = null!;
 
-    public virtual Perfil Perfil { get; set; } = null!;
+    public virtual TblPerfil Perfil { get; set; } = null!;
 }

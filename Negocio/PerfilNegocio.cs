@@ -26,29 +26,27 @@ namespace Negocio
         {
             try
             {
-                List<CatSede> lista = new List<CatSede>();
-
-
+                
                 if (pageSize == 0)
                     throw new Exception("El parámetro pageSize debe ser mayor a cero");
 
-                var Perfiles = await ctx.Perfils.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"Perfil"}, @Id = { null }, @PageSize = {pageSize}, @PageNumber = {pageNumber}").ToListAsync();
+                var Perfiles = await ctx.TblPerfils.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"Perfil"}, @Id = { null }, @PageSize = {pageSize}, @PageNumber = {pageNumber}").ToListAsync();
 
 
                 foreach (var perfil in Perfiles)
                 {
 
 
-                    perfil.PerfilVista = await ctx.PerfilVista.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVista"}, @Id = {perfil.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
-                    foreach (var vista in perfil.PerfilVista)
+                    perfil.RelPerfilvista = await ctx.RelPerfilvista.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVista"}, @Id = {perfil.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
+                    foreach (var vista in perfil.RelPerfilvista)
                     {
                         //vista.PerfilVistaTipoAccesos = await ctx.PerfilVistaTipoAccesos.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVistaTipoAcceso"}, @Id = {vista.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
 
-                        var res = await ctx.PerfilVistaTipoAccesos.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVistaTipoAcceso"}, @Id = {vista.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
+                        var res = await ctx.RelPerfilvistatipoaccesos.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVistaTipoAcceso"}, @Id = {vista.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
 
                     }
 
-                    perfil.PerfilCampuses = await ctx.PerfilCampuses.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilCampus"}, @Id = {perfil.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
+                    perfil.RelPerfilcampuses = await ctx.RelPerfilcampuses.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilCampus"}, @Id = {perfil.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
 
                 }
 

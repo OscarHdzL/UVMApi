@@ -19,7 +19,7 @@ public partial class CatVistum
 
     public string Clave { get; set; } = null!;
 
-    public virtual ICollection<PerfilVistum> PerfilVista { get; set; } = new List<PerfilVistum>();
+    public virtual ICollection<RelPerfilvistum> RelPerfilvista { get; set; } = new List<RelPerfilvistum>();
 
-    public virtual ICollection<Perfil> Perfils { get; set; } = new List<Perfil>();
+    public virtual ICollection<TblPerfil> TblPerfils { get; set; } = new List<TblPerfil>();
 }

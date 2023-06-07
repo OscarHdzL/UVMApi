@@ -31,6 +31,6 @@ namespace Datos.ModelosDBSIAC.DTO
     public class PerfilVistaDTO
     {
         public int Id { get; set; }
-        public List<string> TipoAcceso { get; set;}
+        public List<int> TipoAcceso { get; set;}
     }
 }

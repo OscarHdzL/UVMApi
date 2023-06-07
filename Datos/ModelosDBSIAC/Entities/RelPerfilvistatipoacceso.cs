@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace Datos.ModelosDBSIAC.Entities;
 
-public partial class PerfilVistaTipoAcceso
+public partial class RelPerfilvistatipoacceso
 {
     public int Id { get; set; }
 
     public int PerfilVistaId { get; set; }
 
-    public string CatTipoAccesoId { get; set; } = null!;
+    public int CatTipoAccesoId { get; set; }
 
     public virtual CatTipoAcceso CatTipoAcceso { get; set; } = null!;
 
-    public virtual PerfilVistum PerfilVista { get; set; } = null!;
+    public virtual RelPerfilvistum PerfilVista { get; set; } = null!;
 }

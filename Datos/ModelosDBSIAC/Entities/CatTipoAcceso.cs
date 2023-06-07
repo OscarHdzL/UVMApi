@@ -5,7 +5,7 @@ namespace Datos.ModelosDBSIAC.Entities;
 
 public partial class CatTipoAcceso
 {
-    public string Id { get; set; } = null!;
+    public int Id { get; set; }
 
     public string Nombre { get; set; } = null!;
 
@@ -21,5 +21,5 @@ public partial class CatTipoAcceso
 
     public string? UsuarioModificacion { get; set; }
 
-    public virtual ICollection<PerfilVistaTipoAcceso> PerfilVistaTipoAccesos { get; set; } = new List<PerfilVistaTipoAcceso>();
+    public virtual ICollection<RelPerfilvistatipoacceso> RelPerfilvistatipoaccesos { get; set; } = new List<RelPerfilvistatipoacceso>();
 }

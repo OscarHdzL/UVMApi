@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Datos.ModelosDBSIAC.Entities;
 
-public partial class Perfil
+public partial class TblPerfil
 {
     public int Id { get; set; }
 
@@ -21,9 +21,9 @@ public partial class Perfil
 
     public string? UsuarioModificacion { get; set; }
 
-    public virtual ICollection<PerfilCampus> PerfilCampuses { get; set; } = new List<PerfilCampus>();
+    public virtual ICollection<RelPerfilcampus> RelPerfilcampuses { get; set; } = new List<RelPerfilcampus>();
 
-    public virtual ICollection<PerfilVistum> PerfilVista { get; set; } = new List<PerfilVistum>();
+    public virtual ICollection<RelPerfilvistum> RelPerfilvista { get; set; } = new List<RelPerfilvistum>();
 
     public virtual CatVistum VistaInicialNavigation { get; set; } = null!;
 }
