@@ -43,5 +43,21 @@ namespace UVMApi.Controllers
             return negocio.Insertar(entidad);
         }
 
+
+        [HttpPut]
+        [Route("[action]")]
+        public Task<TipoAccion> Update(PerfilDTO entidad)
+        {
+            return negocio.Actualizar(entidad);
+        }
+
+        [HttpDelete]
+        [Route("[action]")]
+        public Task<TipoAccion> Disable(int id)
+        {
+            //PAGINA 0, NO REGISTROS 1
+            return negocio.Deshabilitar(id);
+        }
+
     }
 }

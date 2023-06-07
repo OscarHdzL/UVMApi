@@ -32,23 +32,27 @@ namespace Negocio
                 if (pageSize == 0)
                     throw new Exception("El parámetro pageSize debe ser mayor a cero");
 
-                var resultados = await ctx.Perfils.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"Perfil"}, @Id = { null }, @PageSize = {pageSize}, @PageNumber = {pageNumber}").ToListAsync();
+                var Perfiles = await ctx.Perfils.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"Perfil"}, @Id = { null }, @PageSize = {pageSize}, @PageNumber = {pageNumber}").ToListAsync();
 
 
-
-                //foreach (var perfil in resultados)
-                //{
-                    
-                    
-                //    perfil.PerfilVista = await this.GetPerfilVista(perfil.Id);
+                foreach (var perfil in Perfiles)
+                {
 
 
-                //}
+                    perfil.PerfilVista = await ctx.PerfilVista.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVista"}, @Id = {perfil.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
+                    foreach (var vista in perfil.PerfilVista)
+                    {
+                        //vista.PerfilVistaTipoAccesos = await ctx.PerfilVistaTipoAccesos.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVistaTipoAcceso"}, @Id = {vista.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
 
+                        var res = await ctx.PerfilVistaTipoAccesos.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVistaTipoAcceso"}, @Id = {vista.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
 
+                    }
 
+                    perfil.PerfilCampuses = await ctx.PerfilCampuses.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilCampus"}, @Id = {perfil.Id}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
 
-                    Respuesta = TipoAccion.Positiva(resultados);
+                }
+
+                Respuesta = TipoAccion.Positiva(Perfiles);
             }
             catch (Exception ex)
             {
@@ -96,15 +100,31 @@ namespace Negocio
         }
 
 
-        public async Task<TipoAccion> GetPerfilVista(int idPerfil)
+        public async Task<TipoAccion> Actualizar(PerfilDTO entidad)
         {
             try
             {
-                List<CatSede> lista = new List<CatSede>();
+                var parametroId = new SqlParameter("@idRespuesta", SqlDbType.Int);
+                parametroId.Direction = ParameterDirection.Output;
+
+                var parametroExito = new SqlParameter("@exito", SqlDbType.Int);
+                parametroExito.Direction = ParameterDirection.Output;
+
+                var parametroMensaje = new SqlParameter("@mensaje", SqlDbType.NVarChar, -1);
+                parametroMensaje.Direction = ParameterDirection.Output;
 
 
-                var resultados = await ctx.Perfils.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVista"}, @Id = {idPerfil}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
-                Respuesta = TipoAccion.Positiva(resultados);
+                await ctx.Database.ExecuteSqlInterpolatedAsync($@"EXEC sp_Perfil_Actualiza
+                                    @TipoActualiza = {"U"},
+                                    @Entidad = {JsonSerializer.Serialize(entidad)}, 
+                                    @idRespuesta = {parametroId} OUTPUT, @exito = {parametroExito} OUTPUT,  @mensaje = {parametroMensaje} OUTPUT");
+
+
+                Respuesta = new TipoAccion();
+                Respuesta.id = (int)parametroId.Value;
+                Respuesta.Exito = (int)parametroExito.Value == 1 ? true : false;
+                Respuesta.Mensaje = (string)parametroMensaje.Value;
+
 
             }
             catch (Exception ex)
@@ -113,17 +133,44 @@ namespace Negocio
             }
 
             return Respuesta;
+
         }
 
-        public async Task<TipoAccion> PerfilVistaTipoAcceso(int idPerfilVista)
+        public async Task<TipoAccion> Deshabilitar(int id)
         {
             try
             {
-                List<CatSede> lista = new List<CatSede>();
+
+                PerfilDTO entidad = new PerfilDTO();
+                entidad.Id = id;
+                entidad.VistaInicial = 0;
+                entidad.Activo = false;
+                entidad.FechaCreacion = DateTime.Now;
+                entidad.FechaModificacion = DateTime.Now;
 
 
-                var resultados = await ctx.Perfils.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilVistaTipoAcceso"}, @Id = {idPerfilVista}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
-                Respuesta = TipoAccion.Positiva(resultados);
+
+                var parametroId = new SqlParameter("@idRespuesta", SqlDbType.Int);
+                parametroId.Direction = ParameterDirection.Output;
+
+                var parametroExito = new SqlParameter("@exito", SqlDbType.Int);
+                parametroExito.Direction = ParameterDirection.Output;
+
+                var parametroMensaje = new SqlParameter("@mensaje", SqlDbType.NVarChar, -1);
+                parametroMensaje.Direction = ParameterDirection.Output;
+
+
+                await ctx.Database.ExecuteSqlInterpolatedAsync($@"EXEC sp_Perfil_Actualiza
+                                    @TipoActualiza = {"D"},
+                                    @Entidad = {JsonSerializer.Serialize(entidad)}, 
+                                    @idRespuesta = {parametroId} OUTPUT, @exito = {parametroExito} OUTPUT,  @mensaje = {parametroMensaje} OUTPUT");
+
+
+                Respuesta = new TipoAccion();
+                Respuesta.id = (int)parametroId.Value;
+                Respuesta.Exito = (int)parametroExito.Value == 1 ? true : false;
+                Respuesta.Mensaje = (string)parametroMensaje.Value;
+
 
             }
             catch (Exception ex)
@@ -132,26 +179,11 @@ namespace Negocio
             }
 
             return Respuesta;
+
         }
 
-        public async Task<TipoAccion> PerfilCampus(int idPerfil)
-        {
-            try
-            {
-                List<CatSede> lista = new List<CatSede>();
 
 
-                var resultados = await ctx.Perfils.FromSqlInterpolated($@"EXEC sp_Perfil_Select @TipoConsulta = {"PerfilCampus"}, @Id = {idPerfil}, @PageSize = {null}, @PageNumber = {null}").ToListAsync();
-                Respuesta = TipoAccion.Positiva(resultados);
-
-            }
-            catch (Exception ex)
-            {
-                Respuesta = TipoAccion.Negativa(ex.Message);
-            }
-
-            return Respuesta;
-        }
 
 
 
